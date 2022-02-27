@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar } from '../components/homepage/Navbar'
+import { Navbar } from '../homepage/Navbar'
 import { DishForm } from './DishForm'
 
 export const DishCreatorPage = () => {

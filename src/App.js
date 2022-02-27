@@ -4,7 +4,7 @@ import { NotFoundPage } from './components/404/NotFoundPage'
 import HomePage from './components/homepage/HomePage'
 import { MenuCreatorPage } from './components/MenuCreator/MenuCreatorPage'
 import { DashboardPage } from './components/UserDashboard/DashboardPage'
-import { DishCreatorPage } from './DishCreator/DishCreatorPage'
+import { DishCreatorPage } from './components/DishCreator/DishCreatorPage'
 
 export const App = () => {
   return (
