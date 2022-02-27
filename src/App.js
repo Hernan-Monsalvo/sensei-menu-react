@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { NotFoundPage } from './components/404/NotFoundPage'
+import HomePage from './components/homepage/HomePage'
+import { MenuCreatorPage } from './components/MenuCreator/MenuCreatorPage'
+import { DashboardPage } from './components/UserDashboard/DashboardPage'
+import { DishCreatorPage } from './DishCreator/DishCreatorPage'
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <BrowserRouter>
+        <Routes>
 
-export default App;
+            <Route path='/' element={<HomePage/>} />
+
+            <Route path='/create-menu' element={<MenuCreatorPage/>} />
+
+            <Route path='/create-dish' element={<DishCreatorPage/>} />
+
+            <Route path='/dashboard' element={<DashboardPage/>} />
+
+            <Route path='/dashboard/*' element={<DashboardPage/>} />
+
+            <Route path='/*' element={<NotFoundPage/>} />
+
+        </Routes>
+    </BrowserRouter>
+  )
+}
