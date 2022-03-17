@@ -65,9 +65,10 @@ export const Carrousel = ({logged}) => {
                 Si decides registrate,
                 podrás acceder a funcionalidades más avanzadas. 
               </h5>
+              {logged &&
               <Link to="/create-menu" className="btn btn-primary me-2 mt-2">
                 Crear mi menú!
-              </Link>
+              </Link>}
               {!logged &&
               <a href="#" className="btn btn-outline-light mt-2" data-bs-toggle="modal" data-bs-target="#registerModal"
                 >Ingresar</a

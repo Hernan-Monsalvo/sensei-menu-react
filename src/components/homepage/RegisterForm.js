@@ -48,7 +48,7 @@ export const RegisterForm = ({closeBtn}) => {
                 setLoading(false);
                 console.log("usuario logeado: " + res.token)
                 closeBtn.current.click()
-                navigate('/create-menu')
+                navigate('/dashboard/menus')
             } else {
                 console.log(res);
                 setError(res)

@@ -58,9 +58,10 @@ export const Navbar = ({ logged, logOut }) => {
               >
             </li>
             }
+            {logged &&
             <li className="nav-item">
               <Link className="nav-link" to="/create-menu">Crea tu menú</Link>
-            </li>
+            </li>}
           </ul>
         </div>
       </div>

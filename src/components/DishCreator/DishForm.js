@@ -1,25 +1,31 @@
 import React from 'react'
 import { useState } from 'react';
 import plus from '../../static/logos/plus--v1.png'
+import { IngredientRow } from './IngredientRow';
+import { helpHttp } from '../../helpers/helpHttp';
+import { dameCookie } from '../../helpers/cookieHelper';
+import { useNavigate } from 'react-router-dom'
 
 
 const ing_initial = {
     name: "",
     amount: "",
-    unit: ""
+    unit: "Kg"
 }
 
 const form_initial = {
     name: "",
-    veggie: false,
-    vegan: false
+    is_veggie: false,
+    is_vegan: false
 }
 
 export const DishForm = () => {
     const [Ingredients, setIngredients] = useState([]);
     const [IngForm, setIngForm] = useState(ing_initial);
-
     const [Form, setForm] = useState(form_initial);
+    const navigate = useNavigate()
+
+    let api = helpHttp();
 
     const addIngredient = (e) => {
         e.preventDefault();
@@ -27,6 +33,12 @@ export const DishForm = () => {
         Ingredients.push(IngForm);
         setIngredients(Ingredients);
         setIngForm(ing_initial);
+        console.log(Ingredients)
+    }
+
+    const removeIngredient = (i) => {
+        Ingredients.splice(i, 1);
+        setIngredients([...Ingredients])
     }
 
     const handleChangeIng = (e) =>{
@@ -54,10 +66,26 @@ export const DishForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // validations
+        if(Form.name != "" && Ingredients.length >= 1){
         Form["ingredients"] = Ingredients;
+
+        let token = dameCookie();
+        let menu_url = "https://menu-semanal-v2.herokuapp.com/api/dish";
+        let options = {body:Form, headers: {"content-type": "application/json", "Authorization": "token "+ token}};
         console.log(Form);
-        //logic for post to api
+        api.post(menu_url, options).then(
+          res => {
+              if(!res.err){
+                console.log(res);
+                navigate("/dashboard/menus")
+              } else {
+                console.log("Error al traer platos")
+              }
+    
+          });
+        } else {
+            alert("completa el formulario")
+        }
 
     }
 
@@ -74,13 +102,13 @@ export const DishForm = () => {
                 
             </div>
             <div className="form-check">
-            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="vegan" value="vegan" id="veganCheck"/>
+            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="is_vegan" value="is_vegan" id="veganCheck"/>
             <label className="form-check-label" htmlFor="veganCheck">
                 Vegano
             </label>
             </div>
             <div className="form-check">
-            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="veggie" value="veggie" id="veggieCheck"/>
+            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="is_veggie" value="is_veggie" id="veggieCheck"/>
             <label className="form-check-label" htmlFor="veggieCheck">
                 Vegetariano
             </label>
@@ -94,13 +122,17 @@ export const DishForm = () => {
             </div>
             <div className="d-flex">
                 <div className="col">
-                    <input type="text" onChange={handleChangeIng} className="form-control" name='name' placeholder="Name" value={IngForm.name}/>
+                    <input type="text" onChange={handleChangeIng} className="form-control" name='name' placeholder="Nombre" value={IngForm.name}/>
                 </div>
                 <div className="col">
-                    <input type="number" onChange={handleChangeIng} className="form-control" name='amount' placeholder="Amount" value={IngForm.amount}/>
+                    <input type="number" min={0} step="0.1" onChange={handleChangeIng} className="form-control" name='amount' placeholder="Cant." value={IngForm.amount}/>
                 </div>
                 <div className="col">
-                    <input type="text" onChange={handleChangeIng} className="form-control" name='unit' placeholder="Unit" value={IngForm.unit}/>
+                    <select className="form-control" name="unit" value={IngForm.unit} onChange={handleChangeIng}>
+                        <option value="Kg">Kg</option>
+                        <option value="Lt">Lt</option>
+                        <option value="Un">Un</option>
+                    </select>
                 </div>
                 <div className="col">
                     <input type="submit" className="form-control btn btn-primary" value="add"/>
@@ -108,9 +140,19 @@ export const DishForm = () => {
             </div>
         </form>
         <div>
-            <ul>
-                {Ingredients.map((e, i)=> <li key={i}>{`${e.name}  ${e.amount}-${e.unit}`}</li>)}
-            </ul>
+        <table className="table text-center">
+  <thead>
+    <tr>
+      <th className="w-25" scope="col"></th>
+      <th className="w-25" scope="col"></th>
+      <th className="w-25" scope="col"></th>
+      <th className="w-25" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+      {Ingredients.map((e,i)=> <IngredientRow key={i} e={e} i={i} removeIngredient={removeIngredient}/>)}
+  </tbody>
+</table>
         </div>
     </div>
   )

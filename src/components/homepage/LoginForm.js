@@ -29,7 +29,7 @@ export const LoginForm = ({closeBtn}) => {
                 setError(null)
                 setLoading(false);
                 closeBtn.current.click()
-                navigate('/create-menu')
+                navigate('/dashboard/menus')
             } else {
                 console.log(res);
                 setError(res)

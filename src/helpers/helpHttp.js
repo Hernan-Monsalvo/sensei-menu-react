@@ -16,7 +16,7 @@ export const helpHttp = () => {
 
         console.log(options);
 
-        setTimeout(() => controller.abort(), 3000);
+        //setTimeout(() => controller.abort(), 3000);
 
         return fetch(endpoint, options).then((res) => res.ok ? getResponse(res):Promise.reject({
             err:true,

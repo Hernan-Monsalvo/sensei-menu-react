@@ -6,6 +6,7 @@ import { MenuPreview } from './MenuPreview'
 import { dameCookie } from '../../helpers/cookieHelper';
 import { helpHttp } from '../../helpers/helpHttp';
 import { ConfirmModal } from './ConfirmModal'
+import { useNavigate } from 'react-router-dom'
 
 export const MenuCreatorPage = () => {
   const[preview, setPreview] = useState([])
@@ -15,6 +16,7 @@ export const MenuCreatorPage = () => {
   const[edit, setEdit] = useState(false);
   const editRef = useRef();
   let api = helpHttp();
+  const navigate = useNavigate()
 
   const days = [
     "Lunes",
@@ -55,6 +57,7 @@ export const MenuCreatorPage = () => {
       res => {
           if(!res.err){
             console.log(res);
+            navigate("/dashboard/menus")
           } else {
             console.log("Error al traer platos")
           }
@@ -65,6 +68,7 @@ export const MenuCreatorPage = () => {
   const logOut = () => {
         document.cookie = 'token=; Max-Age=0; SameSite=None; Secure'
         window.location.reload(); // aca tendria que redirigir a home
+        //navigate("/")
     }
   const editItem = (item, pos) => {
       setitemToEdit(item)
