@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/sensei-menu-react/static/css/main.70a16882.css",
+    "main.js": "/sensei-menu-react/static/js/main.99ad6c34.js",
+    "static/js/787.dde2244c.chunk.js": "/sensei-menu-react/static/js/787.dde2244c.chunk.js",
+    "static/media/comida1.jpg": "/sensei-menu-react/static/media/comida1.3d597b0bc7340a2f7501.jpg",
+    "static/media/comida3.jpg": "/sensei-menu-react/static/media/comida3.ef093d5504aef7113d5e.jpg",
+    "static/media/comida2.jpg": "/sensei-menu-react/static/media/comida2.a76cf6ea20e5925f86a6.jpg",
+    "static/media/listacompra.JPG": "/sensei-menu-react/static/media/listacompra.7f1c6be76ea89e790a8b.JPG",
+    "static/media/vegetariano.JPG": "/sensei-menu-react/static/media/vegetariano.11774b10481e5fb33f5b.JPG",
+    "static/media/menusemanal.JPG": "/sensei-menu-react/static/media/menusemanal.af62b8cf28b1d2c9a44e.JPG",
+    "static/media/receta.JPG": "/sensei-menu-react/static/media/receta.f00d52773760be22eb52.JPG",
+    "static/media/Bromatologia.JPG": "/sensei-menu-react/static/media/Bromatologia.c2c424605721e1f603fa.JPG",
+    "static/media/chef.JPG": "/sensei-menu-react/static/media/chef.1aca840051305c4a8647.JPG",
+    "static/media/plus--v1.png": "/sensei-menu-react/static/media/plus--v1.f96b057e4990d8ef3dd2.png",
+    "index.html": "/sensei-menu-react/index.html",
+    "main.70a16882.css.map": "/sensei-menu-react/static/css/main.70a16882.css.map",
+    "main.99ad6c34.js.map": "/sensei-menu-react/static/js/main.99ad6c34.js.map",
+    "787.dde2244c.chunk.js.map": "/sensei-menu-react/static/js/787.dde2244c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70a16882.css",
+    "static/js/main.99ad6c34.js"
+  ]
+}
