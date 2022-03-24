@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sensei-menu-react/static/css/main.70a16882.css",
-    "main.js": "/sensei-menu-react/static/js/main.7c022b47.js",
+    "main.js": "/sensei-menu-react/static/js/main.17a2609d.js",
     "static/js/787.dde2244c.chunk.js": "/sensei-menu-react/static/js/787.dde2244c.chunk.js",
     "static/media/comida1.jpg": "/sensei-menu-react/static/media/comida1.3d597b0bc7340a2f7501.jpg",
     "static/media/comida3.jpg": "/sensei-menu-react/static/media/comida3.ef093d5504aef7113d5e.jpg",
@@ -15,11 +15,11 @@
     "static/media/plus--v1.png": "/sensei-menu-react/static/media/plus--v1.f96b057e4990d8ef3dd2.png",
     "index.html": "/sensei-menu-react/index.html",
     "main.70a16882.css.map": "/sensei-menu-react/static/css/main.70a16882.css.map",
-    "main.7c022b47.js.map": "/sensei-menu-react/static/js/main.7c022b47.js.map",
+    "main.17a2609d.js.map": "/sensei-menu-react/static/js/main.17a2609d.js.map",
     "787.dde2244c.chunk.js.map": "/sensei-menu-react/static/js/787.dde2244c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.70a16882.css",
-    "static/js/main.7c022b47.js"
+    "static/js/main.17a2609d.js"
   ]
 }
