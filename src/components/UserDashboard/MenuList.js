@@ -6,6 +6,7 @@ import { MenuCard } from './MenuCard';
 
 export const MenuList = () => {
   const[menulist, setMenuList] = useState([])
+  const[loaded, setLoaded] = useState(false)
   let token = dameCookie();
   let url = "https://menu-semanal-v2.herokuapp.com/api/menu";
   let options = {headers: {"content-type": "application/json", "Authorization": "token "+ token}};
@@ -19,12 +20,13 @@ export const MenuList = () => {
             } else {
               console.log("Error al traer menus")
             }
-  
+            setLoaded(true)
         });
     }, []);
   return (
-    <div>
+    <div className='row'>
       {menulist.map((el, i)=> <MenuCard key={i} menu={el}/>)}
+      {(menulist.length === 0 && loaded)&& <h4 style={{margin:"1rem"}}>Aun no tienes menus. crea uno haciendo click en el simbolo +</h4>}
     </div>
   )
 }

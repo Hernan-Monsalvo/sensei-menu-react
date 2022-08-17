@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import plus from '../../static/logos/plus--v1.png'
 import { IngredientRow } from './IngredientRow';
 import { helpHttp } from '../../helpers/helpHttp';
@@ -19,11 +19,23 @@ const form_initial = {
     is_vegan: false
 }
 
-export const DishForm = () => {
+export const DishForm = ({dish}) => {
     const [Ingredients, setIngredients] = useState([]);
     const [IngForm, setIngForm] = useState(ing_initial);
     const [Form, setForm] = useState(form_initial);
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(dish.id){
+            setIngredients([...dish.ingredients]);
+            let form_update = {
+                name: dish.name,
+                is_veggie: dish.is_veggie,
+                is_vegan: dish.is_vegan
+            }
+            setForm(form_update);
+            }
+        }, [dish]);
 
     let api = helpHttp();
 
@@ -73,16 +85,30 @@ export const DishForm = () => {
         let menu_url = "https://menu-semanal-v2.herokuapp.com/api/dish";
         let options = {body:Form, headers: {"content-type": "application/json", "Authorization": "token "+ token}};
         console.log(Form);
-        api.post(menu_url, options).then(
-          res => {
-              if(!res.err){
-                console.log(res);
-                navigate("/dashboard/menus")
-              } else {
-                console.log("Error al traer platos")
-              }
-    
-          });
+        if(dish.id){
+            api.put(menu_url+"/"+dish.id, options).then(
+                res => {
+                    if(!res.err){
+                      console.log(res);
+                      navigate("/dashboard/dishes/"+dish.id)
+                    } else {
+                      console.log("Error al actualizar plato")
+                    }
+          
+                });
+        } else {
+            api.post(menu_url, options).then(
+                res => {
+                    if(!res.err){
+                      console.log(res);
+                      res.id.then(dish =>  {console.log(dish.id); navigate("/dashboard/dishes/"+dish.id)});
+                    } else {
+                      console.log("Error al crear plato")
+                    }
+          
+                });
+        }
+
         } else {
             alert("completa el formulario")
         }
@@ -96,19 +122,19 @@ export const DishForm = () => {
             <div className="d-flex">
                 <div className="col">
                     <label htmlFor="formGroupExampleInput">Nombre del plato</label>
-                    <input onChange={handleChange} type="text" className="form-control" id="formGroupExampleInput" placeholder="Nombre" name="name"/>
+                    <input value={Form.name} onChange={handleChange} type="text" className="form-control" id="formGroupExampleInput" placeholder="Nombre" name="name"/>
                 </div>
                 <input type="submit" className="form-control btn btn-success w-50 m-2" value="Enviar"/>
                 
             </div>
             <div className="form-check">
-            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="is_vegan" value="is_vegan" id="veganCheck"/>
+            <input checked={Form.is_vegan} onChange={toggleCheck} className="form-check-input" type="checkbox" name="is_vegan" value="is_vegan" id="veganCheck"/>
             <label className="form-check-label" htmlFor="veganCheck">
                 Vegano
             </label>
             </div>
             <div className="form-check">
-            <input onClick={toggleCheck} className="form-check-input" type="checkbox" name="is_veggie" value="is_veggie" id="veggieCheck"/>
+            <input checked={Form.is_veggie} onChange={toggleCheck} className="form-check-input" type="checkbox" name="is_veggie" value="is_veggie" id="veggieCheck"/>
             <label className="form-check-label" htmlFor="veggieCheck">
                 Vegetariano
             </label>

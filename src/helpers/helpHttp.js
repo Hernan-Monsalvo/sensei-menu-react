@@ -34,7 +34,7 @@ export const helpHttp = () => {
     }
 
     const put = (url, options = {}) => {
-        options.method = "PUT";
+        options.method = "PATCH";
         return customFetch(url, options);
     }
 
@@ -46,7 +46,9 @@ export const helpHttp = () => {
     const getResponse = (res) => {
 
         if(res.status == 201){
-            return {"status": 201}
+            return {
+                "status": 201,
+                "id": res.json()}
         } else {
             return res.json()
         }

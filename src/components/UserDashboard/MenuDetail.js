@@ -5,6 +5,7 @@ import { helpHttp } from '../../helpers/helpHttp'
 import { useParams } from 'react-router-dom'
 import { MenuTableDish } from './MenuTableDish'
 import { Link } from 'react-router-dom'
+import download from 'downloadjs'
 
 const default_menu = {
   start_day: "",
@@ -27,6 +28,7 @@ const default_menu = {
 
 export const MenuDetail = () => {
     const[menu, setMenu] = useState(default_menu)
+    const[loaded, setLoaded] = useState(false)
     const params = useParams()
     let token = dameCookie();
     let menu_id = params.id
@@ -45,14 +47,44 @@ export const MenuDetail = () => {
               }
     
           });
+          api.get(url+"/list", options).then(
+            res => {
+                if(!res.err){
+                  console.log("response")
+                  console.log(res)
+                } else {
+                  console.log("Error al traer lista")
+                }
+                setLoaded(true)
+            });
       }, []);
 
+      function menuPdf(){
+        downloadFile(token, url+"/pdf")
+      }
+      function listaPdf(){
+        downloadFile(token, url+"/list/pdf")
+      }
+
+      function downloadFile(token, file_url) {
+        return fetch(file_url, {
+          method: 'GET',
+          headers: {
+            'Authorization': "token "+ token
+          }
+        }).then(function(resp) {
+          return resp.blob();
+        }).then(function(blob) {
+          download(blob);
+        });
+      }
+      if (loaded){
   return (
-    <div className="card text-center mx-2 my-2">
+    <div className="card text-center mx-2 my-2" style={{overflow:"auto"}}>
     <div className="card-header">
       {menu.start_day}
     </div>
-    <div className="card-body">
+    <div className="card-body"> 
     <table className="table">
     <thead>
       <tr>
@@ -90,10 +122,12 @@ export const MenuDetail = () => {
     </tbody>
   </table>
   <Link to="/dashboard/menus" className="btn btn-primary mx-1">Volver</Link>
-  <a href="#" className="btn btn-success mx-1">Lista de compras</a>
-  <a href="#" className="btn btn-success mx-1">PDF</a>
+  <button onClick={listaPdf} className="btn btn-success mx-1">Lista de compras</button>
+  <button onClick={menuPdf} className="btn btn-success mx-1">PDF</button>
     </div>
   
   </div>
-  )
+  )} else {
+    return (<div></div>)
+  }
 }

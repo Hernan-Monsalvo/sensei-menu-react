@@ -37,7 +37,7 @@ export const Cards = () => {
                   <cite title="Source Title">Vos, todos los días</cite>
                 </footer>
               </blockquote>
-              <a href="img/menu.html" className="btn btn-primary">Quiero mi menú!!</a>
+              <a href="img/menu.html" className="btn btn-primary disabled">Quiero mi menú!!</a>
             </div>
           </div>
         </div>

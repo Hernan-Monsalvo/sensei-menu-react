@@ -27,9 +27,9 @@ export const Navbar = ({ logged, logOut }) => {
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to="/">Home</Link>
             </li>
-            {!logged && <li className="nav-item">
+            {/* {!logged && <li className="nav-item">
               <a className="nav-link" href="#funcionalidad">Funciones de la App</a>
-            </li>}
+            </li>} */}
             {logged && <li className="nav-item">
               <Link
                 className="nav-link"

@@ -20,6 +20,7 @@ export const DishCard = ( {dish} ) => {
     }
 
     return (
+      <div className="col-6 col-md-4 col-lg-3">
     <div className="card text-center mx-2 my-2">
   <div className="card-header">
     <h5>{dish.name}</h5>
@@ -30,6 +31,7 @@ export const DishCard = ( {dish} ) => {
     <Link to={""+dish.id} className="btn btn-primary mx-2">Ver detalle</Link>
   </div>
 
+</div>
 </div>
   )
 }

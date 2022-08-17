@@ -67,8 +67,7 @@ export const MenuCreatorPage = () => {
 
   const logOut = () => {
         document.cookie = 'token=; Max-Age=0; SameSite=None; Secure'
-        window.location.reload(); // aca tendria que redirigir a home
-        //navigate("/")
+        navigate("/")
     }
   const editItem = (item, pos) => {
       setitemToEdit(item)

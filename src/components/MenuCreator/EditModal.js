@@ -1,8 +1,14 @@
 import React from 'react'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { FilterBar } from '../UserDashboard/FilterBar';
 
 export const EditModal = ({ itemToEdit, dishes, setPreview, preview, posToEdit, setEdit }) => {
   const[choice, setChoice] = useState(itemToEdit);
+  const[filteredDishList, setFilteredDishList] = useState([])
+  
+  useEffect(() => {
+    setFilteredDishList(dishes)
+    }, [dishes]);
 
     const changeDish = (dish, position) => {
       console.log("pos to edit: "+posToEdit);
@@ -22,6 +28,7 @@ export const EditModal = ({ itemToEdit, dishes, setPreview, preview, posToEdit, 
       setChoice(e.target.value,
       );
   };
+  
 
   return (
     <div
@@ -44,6 +51,7 @@ export const EditModal = ({ itemToEdit, dishes, setPreview, preview, posToEdit, 
           ></button>
         </div>
         <div className="modal-body">
+          <FilterBar dishes={dishes} setDishes={setFilteredDishList} bgColor="light"/>
           <select
             className="form-select form-select-sm"
             aria-label=".form-select-sm example"
@@ -51,7 +59,7 @@ export const EditModal = ({ itemToEdit, dishes, setPreview, preview, posToEdit, 
             id="selectEditar"
             onChange={handleChange}
           >
-            {dishes.map((e) => <option key={e.id} value={e.id}>{e.name}</option>)}
+            {filteredDishList.map((e) => <option key={e.id} value={e.id}>{e.name}</option>)}
           </select>
         </div>
         <div className="modal-footer">
