@@ -32,7 +32,7 @@ export const MenuDetail = () => {
     const params = useParams()
     let token = dameCookie();
     let menu_id = params.id
-    let url = "https://menu-semanal-v2.herokuapp.com/api/menu/"+ menu_id;
+    let url = `${process.env.REACT_APP_API_URL}/api/menu/`+ menu_id;
     let options = {headers: {"content-type": "application/json", "Authorization": "token "+ token}};
     let api = helpHttp();
     useEffect(() => {

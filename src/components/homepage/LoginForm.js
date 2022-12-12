@@ -15,7 +15,7 @@ export const LoginForm = ({closeBtn}) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     let api = helpHttp();
-    let url = "https://menu-semanal-v2.herokuapp.com/api/login";
+    let url = `${process.env.REACT_APP_API_URL}/api/login`;
 
     const navigate = useNavigate()
 

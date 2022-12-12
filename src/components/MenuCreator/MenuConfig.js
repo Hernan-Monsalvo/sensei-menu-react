@@ -26,7 +26,7 @@ export const MenuConfig = ({preview}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   let api = helpHttp();
-  let url = "https://menu-semanal-v2.herokuapp.com/api/menu/random";
+  let url = `${process.env.REACT_APP_API_URL}/api/menu/random`;
   const days = [
     "Lunes",
     "Martes",

@@ -18,7 +18,7 @@ export const RegisterForm = ({closeBtn}) => {
     const [loading, setLoading] = useState(false)
     let api = helpHttp();
 
-    let url = "https://menu-semanal-v2.herokuapp.com/api/register";
+    let url = `${process.env.REACT_APP_API_URL}/api/register`;
     const navigate = useNavigate()
     
     const register = (data) => {
@@ -41,7 +41,7 @@ export const RegisterForm = ({closeBtn}) => {
     const registerLogin = (data) =>{
 
         let options = {body:data, headers: {"content-type": "application/json"}};
-        api.post("https://menu-semanal-v2.herokuapp.com/api/login", options).then((res)=>{
+        api.post(`${process.env.REACT_APP_API_URL}/api/login`, options).then((res)=>{
             if(!res.err){
                 document.cookie = `token=${res.token}; SameSite=None; path='/'; Secure`;
                 setError(null)

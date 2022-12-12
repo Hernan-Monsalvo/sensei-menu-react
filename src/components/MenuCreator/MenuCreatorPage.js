@@ -29,7 +29,7 @@ export const MenuCreatorPage = () => {
     ]
 
     let token = dameCookie();
-    let url = "https://menu-semanal-v2.herokuapp.com/api/dish";
+    let url = `${process.env.REACT_APP_API_URL}/api/dish`;
     let options = {headers: {"content-type": "application/json", "Authorization": "token "+ token}};
     useEffect(() => {
       api.get(url, options).then(
@@ -51,7 +51,7 @@ export const MenuCreatorPage = () => {
       data[i+7] = day.dinner ? day.dinner.id : null;
     })
 
-    let menu_url = "https://menu-semanal-v2.herokuapp.com/api/menu";
+    let menu_url = `${process.env.REACT_APP_API_URL}/api/menu`;
     let options = {body:{config: data}, headers: {"content-type": "application/json", "Authorization": "token "+ token}};
     api.post(menu_url, options).then(
       res => {

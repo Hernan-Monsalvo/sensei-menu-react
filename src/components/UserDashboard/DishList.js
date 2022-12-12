@@ -9,7 +9,7 @@ export const DishList = () => {
   const[dishList, setDishList] = useState([])
   const[filteredDishList, setFilteredDishList] = useState([])
   let token = dameCookie();
-  let url = "https://menu-semanal-v2.herokuapp.com/api/dish";
+  let url = `${process.env.REACT_APP_API_URL}/api/dish`;
   let options = {headers: {"content-type": "application/json", "Authorization": "token "+ token}};
   let api = helpHttp();
   useEffect(() => {

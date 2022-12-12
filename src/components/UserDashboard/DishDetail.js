@@ -15,7 +15,7 @@ export const DishDetail = () => {
     let token = dameCookie();
     const navigate = useNavigate()
     let dish_id = params.id
-    let url = "https://menu-semanal-v2.herokuapp.com/api/dish/"+ dish_id;
+    let url = `${process.env.REACT_APP_API_URL}/api/dish/`+ dish_id;
     let options = {headers: {"content-type": "application/json", "Authorization": "token "+ token}};
     let api = helpHttp();
     useEffect(() => {

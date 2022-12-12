@@ -45,7 +45,7 @@ const dameCookie = () => {
 
   useEffect(() => {
     let token = dameCookie();
-    api.get("https://menu-semanal-v2.herokuapp.com/api/ping");
+    api.get(`${process.env.REACT_APP_API_URL}/api/ping`);
     if(token){
       setlogged(true);
     } else {

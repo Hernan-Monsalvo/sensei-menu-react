@@ -82,7 +82,7 @@ export const DishForm = ({dish}) => {
         Form["ingredients"] = Ingredients;
 
         let token = dameCookie();
-        let menu_url = "https://menu-semanal-v2.herokuapp.com/api/dish";
+        let menu_url = `${process.env.REACT_APP_API_URL}/api/dish`;
         let options = {body:Form, headers: {"content-type": "application/json", "Authorization": "token "+ token}};
         console.log(Form);
         if(dish.id){
